@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Train Application</string>
+    <string name="search">Search</string>
+    <string name="icon_sort">Icon Sort</string>
+    <string name="train_icon">Train icon</string>
+    <string name="icon_arrow_to">Icon arrow to</string>
+    <string-array name="sort_type">
+        <item>Price</item>
+        <item>Departing Time</item>
+        <item>Available Seats</item>
+    </string-array>
+    <string-array name="sort_az">
+        <item>A-Z</item>
+        <item>Z-A</item>
+    </string-array>
+</resources>

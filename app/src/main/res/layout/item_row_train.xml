@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp">
+
+    <ImageView
+        android:id="@+id/imageview_train_logo"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:contentDescription="@string/train_icon"
+        android:src="@drawable/ic_vector_product_outline_train"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/textview_train_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/imageview_train_logo"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Train Name" />
+
+    <TextView
+        android:id="@+id/textview_train_depart_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/textview_train_name"
+        app:layout_constraintTop_toBottomOf="@id/textview_train_name"
+        tools:text="Gambir (GMB)" />
+
+    <TextView
+        android:id="@+id/textview_train_depart_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@id/textview_train_depart_from"
+        app:layout_constraintStart_toStartOf="@id/textview_train_depart_from"
+        app:layout_constraintTop_toBottomOf="@id/textview_train_depart_from"
+        tools:text="14.00" />
+
+    <ImageView
+        android:id="@+id/imageview_arrow_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_arrow_forward_24"
+        app:layout_constraintStart_toEndOf="@id/textview_train_depart_from"
+        app:layout_constraintTop_toTopOf="@id/textview_train_depart_from"
+        app:layout_constraintBottom_toBottomOf="@id/textview_train_depart_time"
+        android:layout_marginStart="14dp"
+        android:contentDescription="@string/icon_arrow_to"
+        app:tint="@color/blue" />
+
+    <TextView
+        android:id="@+id/textview_train_arrive_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="14dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/imageview_arrow_to"
+        app:layout_constraintTop_toBottomOf="@id/textview_train_name"
+        tools:text="Bandung (BDG)" />
+
+    <TextView
+        android:id="@+id/textview_train_arrive_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@id/textview_train_arrive_in"
+        app:layout_constraintStart_toStartOf="@id/textview_train_arrive_in"
+        app:layout_constraintTop_toBottomOf="@id/textview_train_arrive_in"
+        tools:text="14.00" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
