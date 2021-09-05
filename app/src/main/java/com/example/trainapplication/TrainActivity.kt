@@ -3,6 +3,7 @@ package com.example.trainapplication
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -47,6 +48,7 @@ class TrainActivity : AppCompatActivity() {
             sortType = it
         }
         trainViewModel.trainSearchResult.observe(this) {
+            Log.d("TAAAG", it.toString())
             updateRecyclerView(it)
         }
     }
@@ -75,6 +77,7 @@ class TrainActivity : AppCompatActivity() {
 
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                     searchQuery = p0.toString()
+//                    trainPresenter.getSearchResult(searchQuery)
                 }
 
                 override fun afterTextChanged(p0: Editable?) {}
@@ -105,6 +108,10 @@ class TrainActivity : AppCompatActivity() {
                         return
                     }
                 }
+
+            cardSortSearchResult.setOnClickListener {
+                spinnerSortSearchResult.performClick()
+            }
 
             buttonSearchTrain.setOnClickListener {
                 trainPresenter.getSearchResult(searchQuery)

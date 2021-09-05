@@ -31,32 +31,45 @@
         app:layout_constraintStart_toEndOf="@id/edittext_search_train"
         app:layout_constraintTop_toTopOf="@id/edittext_search_train" />
 
-    <ImageView
-        android:id="@+id/imageview_sort_icon"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_sort_search_result"
         android:layout_width="wrap_content"
-        android:layout_height="24dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
         android:layout_marginTop="20dp"
-        android:contentDescription="@string/icon_sort"
-        android:src="@drawable/ic_baseline_sort_24"
+        app:cardCornerRadius="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edittext_search_train"
-        app:tint="@color/blue" />
+        app:layout_constraintTop_toBottomOf="@id/edittext_search_train">
 
-    <Spinner
-        android:id="@+id/spinner_sort_search_result"
-        android:layout_width="wrap_content"
-        android:layout_height="24dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        app:layout_constraintStart_toEndOf="@id/imageview_sort_icon"
-        app:layout_constraintTop_toTopOf="@id/imageview_sort_icon" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="10dp">
+
+            <ImageView
+                android:id="@+id/imageview_sort_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:contentDescription="@string/icon_sort"
+                android:src="@drawable/ic_baseline_sort_24"
+                app:tint="@color/blue" />
+
+            <Spinner
+                android:id="@+id/spinner_sort_search_result"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_marginStart="5dp" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_search_result"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/spinner_sort_search_result"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_sort_search_result" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
