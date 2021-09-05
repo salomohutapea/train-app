@@ -15,6 +15,7 @@ import java.util.*
 
 class TrainActivity : AppCompatActivity() {
     private var searchQuery = ""
+    private var tmpSearchQuery = ""
 
     private lateinit var binding: ActivityMainBinding
 
@@ -90,7 +91,7 @@ class TrainActivity : AppCompatActivity() {
             }
 
             trainViewModel.sortType.observe(this@TrainActivity) {
-                spinnerSortSearchResult.setSelection(it.sortType)
+                spinnerSortSearchResult.setSelection(it.type)
             }
 
             spinnerSortSearchResult.onItemSelectedListener =
@@ -114,7 +115,10 @@ class TrainActivity : AppCompatActivity() {
             }
 
             buttonSearchTrain.setOnClickListener {
-                trainPresenter.getSearchResult(searchQuery)
+                if(searchQuery != tmpSearchQuery) {
+                    trainPresenter.getSearchResult(searchQuery)
+                }
+                tmpSearchQuery = searchQuery
             }
         }
     }

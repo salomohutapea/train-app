@@ -3,12 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_baseline_arrow_forward_24.xml" value="0.24444444444444444" />
+        <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.24444444444444444" />
+        <entry key="app/src/main/res/drawable/ic_baseline_sort_by_alpha_24.xml" value="0.24444444444444444" />
         <entry key="app/src/main/res/drawable/ic_vector_person.xml" value="0.18055555555555555" />
         <entry key="app/src/main/res/drawable/ic_vector_product_outline_train.xml" value="0.18055555555555555" />
         <entry key="app/src/main/res/drawable/ic_vector_train_clock.xml" value="0.18055555555555555" />
         <entry key="app/src/main/res/drawable/ic_vector_train_empty.xml" value="0.2624024065241115" />
         <entry key="app/src/main/res/drawable/ic_vector_train_search_destination.xml" value="0.18055555555555555" />
         <entry key="app/src/main/res/drawable/ic_vector_train_search_origin.xml" value="0.18055555555555555" />
+        <entry key="app/src/main/res/drawable/ic_vector_train_seat_12.xml" value="0.24444444444444444" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_row_train.xml" value="0.335" />
       </map>

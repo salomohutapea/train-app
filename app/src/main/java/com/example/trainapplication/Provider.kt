@@ -1,7 +1,5 @@
 package com.example.trainapplication
 
-import android.util.Log
-
 class Provider {
     private val data = GenerateDataHelper.getData()
 
@@ -10,7 +8,6 @@ class Provider {
     fun getTrainData() = data
 
     fun setSortType(sortType: SortTypeModel) {
-        Log.d("TAAG UPDATED", sortType.toString())
         trainApplication.getDatabase()?.sortTypeDao()?.setSortType(sortType)
     }
 

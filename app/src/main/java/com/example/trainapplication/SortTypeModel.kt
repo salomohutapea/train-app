@@ -6,5 +6,5 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "sorttype")
 data class SortTypeModel(
     @PrimaryKey val id: String = "ID",
-    val sortType: Int
+    val type: Int
 )
