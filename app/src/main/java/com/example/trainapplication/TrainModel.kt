@@ -7,6 +7,6 @@ data class TrainModel(
     val arrivingTime: String,
     val departingFrom: String,
     val arrivingIn: String,
-    val availableSeats: String,
-    val price: Double,
+    val availableSeats: Int,
+    val price: Long,
 )

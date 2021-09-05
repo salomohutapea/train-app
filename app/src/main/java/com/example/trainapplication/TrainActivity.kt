@@ -1,22 +1,20 @@
 package com.example.trainapplication
 
-import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.trainapplication.databinding.ActivityMainBinding
 
 class TrainActivity : AppCompatActivity() {
-    private var searchInput = ""
+    private var searchQuery = ""
+    private var sortType = -1
 
     private lateinit var binding: ActivityMainBinding
 
@@ -26,27 +24,34 @@ class TrainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        initializeViewModel()
+        initializePresenter()
+        initializeViews()
+    }
+
+    private fun initializePresenter() {
+        trainPresenter = TrainPresenter(trainViewModel)
+        trainPresenter.getSearchResult(searchQuery)
+    }
+
+    private fun initializeViewModel() {
         trainViewModel = ViewModelProvider(
             this,
             ViewModelProvider.NewInstanceFactory()
         ).get(TrainViewModel::class.java)
 
-        trainPresenter = TrainPresenter(trainViewModel)
-
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        initializeViews()
-        initializeViewModel()
-    }
-
-    private fun initializeViewModel() {
+        trainViewModel.sortType.observe(this) {
+            sortType = it
+        }
         trainViewModel.trainSearchResult.observe(this) {
             updateRecyclerView(it)
         }
     }
 
-    private fun updateRecyclerView(list: ArrayList<TrainModel>) {
+    private fun updateRecyclerView(list: List<TrainModel>) {
         val trainInventoryAdapter = TrainInventoryAdapter(list)
         with(binding.recyclerviewSearchResult) {
             adapter = trainInventoryAdapter
@@ -58,7 +63,7 @@ class TrainActivity : AppCompatActivity() {
         trainInventoryAdapter.setOnItemClickCallback(object :
             TrainInventoryAdapter.OnItemClickCallback {
             override fun onItemClicked(data: TrainModel) {
-                // CLICKED
+                Toast.makeText(this@TrainActivity, data.name, Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -69,7 +74,7 @@ class TrainActivity : AppCompatActivity() {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    Log.d("TEXT CHANGED", p0.toString())
+                    searchQuery = p0.toString()
                 }
 
                 override fun afterTextChanged(p0: Editable?) {}
@@ -100,6 +105,10 @@ class TrainActivity : AppCompatActivity() {
                         return
                     }
                 }
+
+            buttonSearchTrain.setOnClickListener {
+                trainPresenter.getSearchResult(searchQuery)
+            }
         }
     }
 }

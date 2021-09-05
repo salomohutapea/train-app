@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainapplication.databinding.ItemRowTrainBinding
 
-class TrainInventoryAdapter(private val trainInventory: ArrayList<TrainModel>) :
+class TrainInventoryAdapter(private val trainInventory: List<TrainModel>) :
     RecyclerView.Adapter<TrainInventoryAdapter.ListViewHolder>() {
     private lateinit var onItemClickCallback: OnItemClickCallback
 
@@ -23,14 +23,14 @@ class TrainInventoryAdapter(private val trainInventory: ArrayList<TrainModel>) :
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-//        val user = listUser[position]
-//        Glide.with(holder.itemView.context)
-//            .load(user.avatar)
-//            .into(holder.binding.singleImgUser)
-//        holder.binding.singleUsernameUser.text = user.username
-//        holder.binding.singleRepoUser.text = user.public_repos
-//        holder.binding.singleTvFollowers.text = user.followers
-//        holder.binding.singleTvFollowing.text = user.following
+        val train = trainInventory[position]
+        with(holder.binding) {
+            textviewTrainName.text = train.name
+            textviewTrainArriveIn.text = train.arrivingIn
+            textviewTrainDepartFrom.text = train.departingFrom
+            textviewTrainArriveTime.text = train.arrivingTime.substring(11, 16)
+            textviewTrainDepartTime.text = train.departingTime.substring(11, 16)
+        }
     }
 
     override fun getItemCount(): Int {

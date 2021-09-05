@@ -1,11 +1,15 @@
 package com.example.trainapplication
 
-import android.content.Context
-import androidx.lifecycle.LifecycleOwner
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-
 class TrainPresenter(private val viewModel: TrainViewModel) {
+    private val data = GenerateDataHelper.getData()
 
+    fun getSearchResult(query: String) {
+        if (query == "") {
+            viewModel.trainSearchResult.postValue(data)
+        }
+    }
 
+    fun setCurrentSortType() {
+
+    }
 }
