@@ -96,7 +96,7 @@ object GenerateDataHelper {
                           "departingFrom": "Yogyakarta (YK)",
                           "arrivingIn": "Gambir (GMR)",
                           "availableSeats": 4,
-                          "price": 800000,
+                          "price": 900000,
                         },
                         {
                           "id": "10axvkt78e",

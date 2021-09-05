@@ -3,7 +3,6 @@ package com.example.trainapplication
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -12,10 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.trainapplication.databinding.ActivityMainBinding
+import java.util.*
 
 class TrainActivity : AppCompatActivity() {
     private var searchQuery = ""
-    private var sortType = -1
 
     private lateinit var binding: ActivityMainBinding
 
@@ -36,6 +35,7 @@ class TrainActivity : AppCompatActivity() {
     private fun initializePresenter() {
         trainPresenter = TrainPresenter(trainViewModel)
         trainPresenter.getSearchResult(searchQuery)
+        trainPresenter.getSortType()
     }
 
     private fun initializeViewModel() {
@@ -44,11 +44,7 @@ class TrainActivity : AppCompatActivity() {
             ViewModelProvider.NewInstanceFactory()
         ).get(TrainViewModel::class.java)
 
-        trainViewModel.sortType.observe(this) {
-            sortType = it
-        }
         trainViewModel.trainSearchResult.observe(this) {
-            Log.d("TAAAG", it.toString())
             updateRecyclerView(it)
         }
     }
@@ -93,6 +89,10 @@ class TrainActivity : AppCompatActivity() {
                 spinnerSortSearchResult.adapter = adapter
             }
 
+            trainViewModel.sortType.observe(this@TrainActivity) {
+                spinnerSortSearchResult.setSelection(it.sortType)
+            }
+
             spinnerSortSearchResult.onItemSelectedListener =
                 object : AdapterView.OnItemSelectedListener {
                     override fun onItemSelected(
@@ -101,7 +101,7 @@ class TrainActivity : AppCompatActivity() {
                         i: Int,
                         l: Long
                     ) {
-                        // Your code here
+                        trainPresenter.setSortType(SortTypeModel("ID", i))
                     }
 
                     override fun onNothingSelected(adapterView: AdapterView<*>?) {

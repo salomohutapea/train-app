@@ -10,7 +10,7 @@
         <entry key="app/src/main/res/drawable/ic_vector_train_search_destination.xml" value="0.18055555555555555" />
         <entry key="app/src/main/res/drawable/ic_vector_train_search_origin.xml" value="0.18055555555555555" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/item_row_train.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_row_train.xml" value="0.335" />
       </map>
     </option>
   </component>

@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -42,13 +43,18 @@ dependencies {
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
-
     implementation 'com.beust:klaxon:5.5'
 
     // RxJava
     implementation "io.reactivex.rxjava2:rxjava:2.2.19"
     implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
     implementation "io.reactivex.rxjava2:rxkotlin:2.4.0"
+
+    // ROOM DB
+    implementation 'androidx.room:room-runtime:2.3.0'
+    implementation "androidx.room:room-ktx:2.3.0"
+    kapt 'androidx.room:room-compiler:2.3.0'
+    kapt "org.xerial:sqlite-jdbc:3.34.0"
 
     // Testing
     testImplementation 'junit:junit:4.13.2'

@@ -5,5 +5,5 @@ import androidx.lifecycle.ViewModel
 
 class TrainViewModel : ViewModel() {
     var trainSearchResult = MutableLiveData<List<TrainModel>>()
-    var sortType = MutableLiveData<Int>()
+    var sortType = MutableLiveData<SortTypeModel>()
 }

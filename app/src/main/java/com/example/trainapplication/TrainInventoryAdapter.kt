@@ -5,6 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainapplication.databinding.ItemRowTrainBinding
+import java.lang.StringBuilder
+import java.text.NumberFormat
+import java.util.*
 
 class TrainInventoryAdapter(private val trainInventory: List<TrainModel>) :
     RecyclerView.Adapter<TrainInventoryAdapter.ListViewHolder>() {
@@ -30,6 +33,10 @@ class TrainInventoryAdapter(private val trainInventory: List<TrainModel>) :
             textviewTrainDepartFrom.text = train.departingFrom
             textviewTrainArriveTime.text = train.arrivingTime.substring(11, 16)
             textviewTrainDepartTime.text = train.departingTime.substring(11, 16)
+            textviewTrainPrice.text = StringBuilder(
+                "IDR " + NumberFormat.getNumberInstance(Locale.getDefault()).format(train.price)
+            )
+            textviewTrainSeat.text = train.availableSeats.toString()
         }
     }
 

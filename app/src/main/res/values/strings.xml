@@ -4,6 +4,7 @@
     <string name="icon_sort">Icon Sort</string>
     <string name="train_icon">Train icon</string>
     <string name="icon_arrow_to">Icon arrow to</string>
+    <string name="icon_seat">Icon Seat</string>
     <string-array name="sort_type">
         <item>Price</item>
         <item>Departing Time</item>

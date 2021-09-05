@@ -1,13 +1,11 @@
 package com.example.trainapplication
 
-import android.util.Log
-
-class TrainPresenter(private val viewModel: TrainViewModel) {
+class TrainPresenter constructor(private val viewModel: TrainViewModel) {
     private val data = GenerateDataHelper.getData()
+    private val provider = Provider()
 
     fun getSearchResult(query: String) {
         if (query == "") {
-            Log.d("TAAAG", "KOSONG")
             viewModel.trainSearchResult.postValue(data)
         } else {
             val filteredData = data?.filter { it.name.contains(query, ignoreCase = true) }
@@ -15,7 +13,12 @@ class TrainPresenter(private val viewModel: TrainViewModel) {
         }
     }
 
-    fun setCurrentSortType() {
-
+    fun setSortType(sortType: SortTypeModel) {
+        provider.setSortType(sortType)
     }
+
+    fun getSortType() {
+        viewModel.sortType.postValue(provider.getSortType())
+    }
+
 }
