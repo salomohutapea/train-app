@@ -15,7 +15,7 @@ class Provider {
         val data = trainApplication.getDatabase()?.sortTypeDao()?.getSortType()
 
         if (data == null)
-            trainApplication.getDatabase()?.sortTypeDao()?.addSortType(SortTypeModel("ID",0))
+            trainApplication.getDatabase()?.sortTypeDao()?.addSortType(SortTypeModel(type = 0))
 
         return trainApplication.getDatabase()?.sortTypeDao()?.getSortType()
     }

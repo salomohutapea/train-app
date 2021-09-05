@@ -54,8 +54,6 @@ class TrainActivity : AppCompatActivity() {
         val trainInventoryAdapter = TrainInventoryAdapter(list)
         with(binding.recyclerviewSearchResult) {
             adapter = trainInventoryAdapter
-            this.itemAnimator = null
-            this.setHasFixedSize(true)
             this.layoutManager = LinearLayoutManager(context)
         }
 
@@ -102,7 +100,7 @@ class TrainActivity : AppCompatActivity() {
                         i: Int,
                         l: Long
                     ) {
-                        trainPresenter.setSortType(SortTypeModel("ID", i))
+                        trainPresenter.setSortType(SortTypeModel(type = i))
                     }
 
                     override fun onNothingSelected(adapterView: AdapterView<*>?) {
