@@ -1,9 +1,9 @@
 package com.example.trainapplication
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import io.reactivex.subjects.BehaviorSubject
 
 class TrainViewModel : ViewModel() {
-    var trainSearchResult = MutableLiveData<List<TrainModel>>()
-    var sortType = MutableLiveData<SortTypeModel>()
+    var sortType = BehaviorSubject.create<SortTypeModel>()
+    var trainSearchResult = BehaviorSubject.create<List<TrainModel>>()
 }

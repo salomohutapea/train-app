@@ -11,16 +11,22 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.trainapplication.databinding.ActivityMainBinding
+import io.reactivex.schedulers.Schedulers
 import java.util.*
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 
 class TrainActivity : AppCompatActivity() {
+
     private var searchQuery = ""
     private var tmpSearchQuery = ""
+    private var compositeDisposable = CompositeDisposable()
 
     private lateinit var binding: ActivityMainBinding
-
     private lateinit var trainPresenter: TrainPresenter
     private lateinit var trainViewModel: TrainViewModel
+    private lateinit var searchResultDisposable: Disposable
+    private lateinit var sortTypeDisposable: Disposable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,9 +51,12 @@ class TrainActivity : AppCompatActivity() {
             ViewModelProvider.NewInstanceFactory()
         ).get(TrainViewModel::class.java)
 
-        trainViewModel.trainSearchResult.observe(this) {
-            updateRecyclerView(it)
-        }
+        searchResultDisposable = trainViewModel.trainSearchResult.subscribeOn(Schedulers.io())
+            .subscribe {
+                updateRecyclerView(it)
+            }
+
+        compositeDisposable.add(searchResultDisposable)
     }
 
     private fun updateRecyclerView(list: List<TrainModel>) {
@@ -88,9 +97,11 @@ class TrainActivity : AppCompatActivity() {
                 spinnerSortSearchResult.adapter = adapter
             }
 
-            trainViewModel.sortType.observe(this@TrainActivity) {
+            sortTypeDisposable = trainViewModel.sortType.subscribe {
                 spinnerSortSearchResult.setSelection(it.type)
             }
+
+            compositeDisposable.add(sortTypeDisposable)
 
             spinnerSortSearchResult.onItemSelectedListener =
                 object : AdapterView.OnItemSelectedListener {
@@ -113,11 +124,17 @@ class TrainActivity : AppCompatActivity() {
             }
 
             buttonSearchTrain.setOnClickListener {
-                if(searchQuery != tmpSearchQuery) {
+                if (searchQuery != tmpSearchQuery) {
                     trainPresenter.getSearchResult(searchQuery)
                 }
                 tmpSearchQuery = searchQuery
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        compositeDisposable.dispose()
     }
 }

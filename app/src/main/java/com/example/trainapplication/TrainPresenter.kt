@@ -11,11 +11,13 @@ class TrainPresenter constructor(private val viewModel: TrainViewModel) {
         if (query == "") {
             filteredData = trainData
             val sortedData = trainData?.toMutableList()?.let { sortTrain(it) }
-            viewModel.trainSearchResult.postValue(sortedData)
+            sortedData?.let { viewModel.trainSearchResult.onNext(it) }
+
         } else {
             filteredData = trainData?.filter { it.name.contains(query, ignoreCase = true) }
             val sortedData = filteredData?.toMutableList()?.let { sortTrain(it) }
-            viewModel.trainSearchResult.postValue(sortedData)
+            sortedData?.let { viewModel.trainSearchResult.onNext(it) }
+
         }
     }
 
@@ -23,12 +25,12 @@ class TrainPresenter constructor(private val viewModel: TrainViewModel) {
         provider.setSortType(sortType)
         this.sortType = sortType
         val sortedData = filteredData?.toMutableList()?.let { sortTrain(it) }
-        viewModel.trainSearchResult.postValue(sortedData)
+        sortedData?.let { viewModel.trainSearchResult.onNext(it) }
     }
 
     fun getSortType() {
         sortType = provider.getSortType()
-        viewModel.sortType.postValue(sortType)
+        sortType?.let { viewModel.sortType.onNext(it) }
     }
 
     private fun sortTrain(items: MutableList<TrainModel>): List<TrainModel> {

@@ -2,7 +2,6 @@ package com.example.trainapplication
 
 class Provider {
     private val data = GenerateDataHelper.getData()
-
     private val trainApplication = TrainApplication
 
     fun getTrainData() = data
