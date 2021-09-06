@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainapplication.databinding.ItemRowTrainBinding
-import java.lang.StringBuilder
 import java.text.NumberFormat
 import java.util.*
 

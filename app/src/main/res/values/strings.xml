@@ -10,8 +10,4 @@
         <item>Departing Time</item>
         <item>Available Seats</item>
     </string-array>
-    <string-array name="sort_az">
-        <item>A-Z</item>
-        <item>Z-A</item>
-    </string-array>
 </resources>

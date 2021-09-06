@@ -11,10 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.trainapplication.databinding.ActivityMainBinding
-import io.reactivex.schedulers.Schedulers
-import java.util.*
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
+import java.util.*
 
 class TrainActivity : AppCompatActivity() {
 
@@ -97,9 +97,10 @@ class TrainActivity : AppCompatActivity() {
                 spinnerSortSearchResult.adapter = adapter
             }
 
-            sortTypeDisposable = trainViewModel.sortType.subscribe {
-                spinnerSortSearchResult.setSelection(it.type)
-            }
+            sortTypeDisposable = trainViewModel.sortType.subscribeOn(Schedulers.io())
+                .subscribe {
+                    spinnerSortSearchResult.setSelection(it.type)
+                }
 
             compositeDisposable.add(sortTypeDisposable)
 
