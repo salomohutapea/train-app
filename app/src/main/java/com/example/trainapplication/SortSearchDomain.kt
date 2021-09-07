@@ -1,9 +1,10 @@
 package com.example.trainapplication
 
-class SortSearchDomain(private var trainData: List<TrainModel>) {
+class SortSearchDomain {
 
+    var trainData = listOf<TrainModel>()
     private var filteredData = trainData
-    var sortType: SortTypeModel? = null
+    var sortType: SortTypeModel? = SortTypeModel(type = 0)
 
     fun searchAndSort(query: String): List<TrainModel> {
         filteredData = if (query == "") {
@@ -15,6 +16,7 @@ class SortSearchDomain(private var trainData: List<TrainModel>) {
     }
 
     private fun sort(): List<TrainModel> {
+
         val items: MutableList<TrainModel> = filteredData.toMutableList()
 
         when (sortType?.type) {
