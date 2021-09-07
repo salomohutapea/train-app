@@ -4,74 +4,22 @@ class TrainPresenter constructor(private val viewModel: TrainViewModel) {
 
     private val provider = Provider()
     private val trainData = provider.getTrainData()
-    private var filteredData = trainData
-    private var sortType: SortTypeModel? = null
+    private val sortSearchDomain = trainData?.let { SortSearchDomain(it) }
+    private var searchQuery = ""
 
     fun getSearchResult(query: String) {
-        if (query == "") {
-            filteredData = trainData
-            val sortedData = trainData?.toMutableList()?.let { sortTrain(it) }
-            sortedData?.let { viewModel.trainSearchResult.onNext(it) }
-
-        } else {
-            filteredData = trainData?.filter { it.name.contains(query, ignoreCase = true) }
-            val sortedData = filteredData?.toMutableList()?.let { sortTrain(it) }
-            sortedData?.let { viewModel.trainSearchResult.onNext(it) }
-
-        }
+        searchQuery = query
+        sortSearchDomain?.searchAndSort(query)?.let { viewModel.trainSearchResult.onNext(it) }
     }
 
     fun setSortType(sortType: SortTypeModel) {
         provider.setSortType(sortType)
-        this.sortType = sortType
-        val sortedData = filteredData?.toMutableList()?.let { sortTrain(it) }
-        sortedData?.let { viewModel.trainSearchResult.onNext(it) }
+        sortSearchDomain?.sortType = sortType
+        sortSearchDomain?.searchAndSort(searchQuery)?.let { viewModel.trainSearchResult.onNext(it) }
     }
 
     fun getSortType() {
-        sortType = provider.getSortType()
-        sortType?.let { viewModel.sortType.onNext(it) }
-    }
-
-    private fun sortTrain(items: MutableList<TrainModel>): List<TrainModel> {
-
-        when (sortType?.type) {
-            0 -> {
-                for (count in 1 until items.count()) {
-                    val item = items[count]
-                    var i = count
-                    while (i > 0 && item.price < items[i - 1].price) {
-                        items[i] = items[i - 1]
-                        i -= 1
-                    }
-                    items[i] = item
-                }
-            }
-            1 -> {
-                for (count in 1 until items.count()) {
-                    val item = items[count]
-                    var i = count
-                    while (i > 0 && item.departingTime < items[i - 1].departingTime) {
-                        items[i] = items[i - 1]
-                        i -= 1
-                    }
-                    items[i] = item
-                }
-            }
-            2 -> {
-                for (count in 1 until items.count()) {
-                    val item = items[count]
-                    var i = count
-                    while (i > 0 && item.availableSeats < items[i - 1].availableSeats) {
-                        items[i] = items[i - 1]
-                        i -= 1
-                    }
-                    items[i] = item
-                }
-                items.reverse()
-            }
-        }
-
-        return items
+        sortSearchDomain?.sortType = provider.getSortType()
+        sortSearchDomain?.sortType?.let { viewModel.sortType.onNext(it) }
     }
 }
